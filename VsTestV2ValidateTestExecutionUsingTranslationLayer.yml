@@ -1,0 +1,19 @@
+# The objective is to perform VSTESTV2 Validate TestExecution Using TranslationLayer
+
+trigger:
+- master
+jobs:
+- job: RunTest1
+  displayName: 'Run Tests'
+  pool: Default
+  steps:      
+  - task: VisualStudioTestPlatformInstaller@1
+    displayName: 'Visual Studio Test Platform Installer'
+    inputs:
+      versionSelector: 'latestPreRelease'
+  - task: VSTest@2
+    inputs:  
+      testSelector: 'testAssemblies'     
+      testAssemblyVer2: '**/*test*.dll'
+      testFiltercriteria: 'Name~TestMethod'
+      vsTestVersion: 'toolsInstaller'
